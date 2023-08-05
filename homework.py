@@ -2,7 +2,6 @@ import logging
 import os
 import sys
 import time
-from http import HTTPStatus
 import requests
 import telegram
 
@@ -51,7 +50,7 @@ def get_api_answer(current_timestamp):
     params = {'from_date': timestamp}
     try:
         response = requests.get(ENDPOINT, headers=HEADERS, params=params)
-        response.raise_for_status()  # Вызывает исключение, если код статуса не 2xx
+        response.raise_for_status()
     except requests.exceptions.RequestException as e:
         message = 'Не удается связаться с конечной точкой.'
         raise RuntimeError(message) from e
@@ -93,7 +92,7 @@ def parse_status(homework):
     try:
         verdict = HOMEWORK_VERDICTS[homework_status]
     except KeyError:
-        message = f'API вернул неизвестный статус "{homework_status}" для "{homework_name}".'
+        message = f'неизв. cnfn "{homework_status}" для "{homework_name}".'
         raise ValueError(message)
 
     return f'Изменился статус проверки работы "{homework_name}". {verdict}'
@@ -102,7 +101,7 @@ def parse_status(homework):
 def check_tokens():
     """
     Возвращает False, если одна из переменных TOKENS или CHAT_ID пуста.
-    Возвращает True, если PRACTICUM_TOKEN, TELEGRAM_TOKEN или TELEGRAM_CHAT_ID не пусты.
+    Возвращает True если токены не пусты.
     """
     return all(
         [
