@@ -60,7 +60,7 @@ def check_response(response):
         raise TypeError('Ошибка в ответе со словарём.')
     homework = response.get('homeworks')
     if not isinstance(homework, list):
-        raise exceptions.InvalidResponse('Данные о домашках не представлены списком.')
+        raise exceptions.InvalidResponse('Данные о дз оказались списком.')
     return homework
 
 
