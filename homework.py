@@ -60,7 +60,7 @@ def check_response(response):
         raise TypeError('Ошибка в ответе со словарём.')
     homework = response.get('homeworks')
     if not isinstance(homework, list):
-        raise KeyError('Homework не является списком.')
+        raise exceptions.InvalidResponse('Данные о домашках не представлены списком.')
     return homework
 
 
@@ -70,10 +70,7 @@ def parse_status(homework):
         raise KeyError('В ответе отсутсвует ключ homework_name.')
 
     homework_name = homework['homework_name']
-    verdict = homework.get('status')
-
-    if verdict not in HOMEWORK_VERDICTS:
-        raise ValueError(f'Неизвестный вердикт работы - {verdict}')
+    verdict = homework.get('status', 'unknown')
 
     return f'Изменился статус проверки работы "{homework_name}". {verdict}'
 
