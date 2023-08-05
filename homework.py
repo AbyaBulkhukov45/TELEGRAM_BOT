@@ -28,17 +28,17 @@ HOMEWORK_VERDICTS = {
 
 
 def check_tokens():
-    """Проверяем есть ли все токены авторизации"""
+    """Проверяем есть ли все токены авторизации."""
     return all([PRACTICUM_TOKEN, TELEGRAM_TOKEN, TELEGRAM_CHAT_ID])
 
 
 def send_message(bot, message):
-    """Отправка сообщения через бота"""
+    """Отправка сообщения через бота."""
     bot.send_message(chat_id=TELEGRAM_CHAT_ID, text=message)
 
 
 def get_api_answer(timestamp):
-    """Получаем статус дз"""
+    """Получаем статус дз."""
     params_request = {
         'url': ENDPOINT,
         'headers': HEADERS,
@@ -54,20 +54,20 @@ def get_api_answer(timestamp):
 
 
 def check_response(response):
-    """Проверяем валидность ответа"""
+    """Проверяем валидность ответа."""
     logging.debug('Начало проверки')
     if not isinstance(response, dict):
-        raise TypeError('Ошибка в ответе со словарём')
+        raise TypeError('Ошибка в ответе со словарём.')
     homework = response.get('homeworks')
     if not isinstance(homework, list):
-        raise KeyError('Homework не является списком')
+        raise KeyError('Homework не является списком.')
     return homework
 
 
 def parse_status(homework):
     """Распарсить ответ."""
     if 'homework_name' not in homework:
-        raise KeyError('В ответе отсутсвует ключ homework_name')
+        raise KeyError('В ответе отсутсвует ключ homework_name.')
 
     homework_name = homework['homework_name']
     verdict = homework.get('status')
