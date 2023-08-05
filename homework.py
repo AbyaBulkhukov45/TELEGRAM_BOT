@@ -1,11 +1,13 @@
 import logging
 import os
 import sys
-import requests
+
 import time
-import exceptions
-import telegram
 from http import HTTPStatus
+import requests
+import telegram
+
+import exceptions
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -31,6 +33,7 @@ def check_tokens():
 
 
 def send_message(bot, message):
+    """Отправка сообщения через бота"""
     bot.send_message(chat_id=TELEGRAM_CHAT_ID, text=message)
 
 
