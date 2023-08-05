@@ -1,5 +1,14 @@
-class InvalResponse(Exception):
+class MissingTokensError(Exception):
     pass
 
-class ConnectError(Exception):
+
+class StatusCodeError(Exception):
+    pass
+
+
+class HomeworkError(Exception):
+    pass
+
+
+class StatusError(Exception):
     pass
