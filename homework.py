@@ -70,18 +70,17 @@ def get_api_answer(timestamp: int) -> dict:
 def check_response(response: dict) -> list:
     """Функция проверки типа данных полученного ответа."""
     if not isinstance(response, dict):
-        error_message = 'Неверный тип данных: ожидается dict, получен ' + str(type(response))
+        error_message = 'Неверный тип данных'
         logging.error(error_message)
         raise TypeError(error_message)
 
     homeworks = response.get('homeworks')
     if not isinstance(homeworks, list):
-        error_message = 'Неверный тип данных ключа домашнего задания: ожидается list, получен ' + str(type(homeworks))
+        error_message = 'Неверный тип ключа дз'
         logging.error(error_message)
         raise TypeError(error_message)
 
     return homeworks
-
 
 
 def parse_status(homework: dict) -> str:
