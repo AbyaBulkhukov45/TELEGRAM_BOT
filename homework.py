@@ -98,6 +98,7 @@ def parse_status(homework: dict) -> str:
 def main() -> None:
     """Основная логика работы бота."""
     if not check_tokens():
+        logging.critical('нету переменных окружения')
         sys.exit('Отсутсвуют переменные окружения')
 
     bot = telegram.Bot(token=TELEGRAM_TOKEN)
