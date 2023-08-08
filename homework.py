@@ -15,6 +15,7 @@ from telegram.error import TimedOut
 
 load_dotenv()
 
+MISSING_ENV_VARIABLES_MSG = 'Отсутсвуют переменные окружения'
 PRACTICUM_TOKEN: str = os.getenv('PRACTICUM_TOKEN')
 TELEGRAM_TOKEN: str = os.getenv('TOKEN')
 TELEGRAM_CHAT_ID: str = os.getenv('TELEGRAM_CHAT_ID')
@@ -98,8 +99,8 @@ def parse_status(homework: dict) -> str:
 def main() -> None:
     """Основная логика работы бота."""
     if not check_tokens():
-        logging.critical('нету переменных окружения')
-        sys.exit('Отсутсвуют переменные окружения')
+        logging.critical(MISSING_ENV_VARIABLES_MSG)
+        sys.exit(MISSING_ENV_VARIABLES_MSG)
 
     bot = telegram.Bot(token=TELEGRAM_TOKEN)
     timestamp = int(time.time())
